@@ -67,6 +67,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'in progress'}" class="row list-item bg-warning">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
+                            <p>Task by <span></span>{{ authData.github.displayName }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-success" ng-click="completeTodo($index, todo)"><i class="glyphicon glyphicon-ok"></i>Complete</a>
@@ -79,6 +80,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'complete'}" class="row list-item bg-success">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
+                            <p>Task by <span></span>{{ authData.github.displayName }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-danger" ng-click="removeTodo($index, todo)"><i class="glyphicon glyphicon-remove"></i> Remove</a>
