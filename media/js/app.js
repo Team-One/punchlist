@@ -2,12 +2,43 @@ var app = angular.module('app', ['firebase']);
 
 
 app.controller('Ctrl', function($scope, $firebaseAuth, $firebaseArray) {
-        
+
+    var isNewUser = true;
     var ref = new Firebase('https://luminous-heat-4501.firebaseio.com/');
+    var auth = $firebaseAuth(ref);
+    var authData = ref.getAuth();
+
+    function authDataCallback(authData) {
+        if (authData) {
+           console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+            console.log("User is logged out");
+        }
+    }
+
+    ref.onAuth(authDataCallback);
+
+    ref.onAuth(function(authData) {
+        if (authData && isNewUser) {
+            ref.child("users").child(authData.uid).set({
+            provider: authData.provider,
+            name: getName(authData)
+            });
+        }
+    });
+
+    function getName(authData) {
+        switch(authData.provider) {
+            case 'password':
+                return authData.password.email.replace(/@.*/, '');
+            case 'twitter':
+                return authData.twitter.displayName;
+            case 'facebook':
+                return authData.facebook.displayName;
+        }
+    }
 
     // LOGIN WITH FACEBOOK
-
-    var auth = $firebaseAuth(ref);
 
     auth.$onAuth(function(authData) {
         $scope.authData = authData;
