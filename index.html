@@ -18,7 +18,7 @@
                     <div class="content">
                         <h1>PUNCHLIST</h1>
                         <h2>Create &amp; Complete Tasks</h2>
-                        <button class="btn btn-default" ng-click="login()">Login with Github</button>
+                         <button class="btn btn-default btn-fb" ng-click="login()">Login with Facebook</button>
                     </div>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                 <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container">
                         <div class="info">
-                            <img ng-src="{{ authData.github.cachedUserProfile.avatar_url }}"/>
-                            <p>{{ authData.github.displayName }}</p>
+                            <img ng-src="{{ authData.facebook.profileImageURL }}"/>
+                            <p>{{ authData.facebook.displayName }}</p>
                         </div>
                         <button class="btn btn-logout btn-default"ng-click="logout()">Logout</button>
                     </div>
@@ -53,7 +53,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'pending'}" class="row list-item">
                         <div class="col-md-9">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.github.displayName }}</p>
+                            <p>Task by <span></span>{{ authData.facebook.displayName }} </p>
                         </div>
                         <div class="col-md-3 text-right">
                             <a class="btn btn-warning" ng-click="startTodo($index, todo)">Start</a>
@@ -68,7 +68,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'in progress'}" class="row list-item bg-warning">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.github.displayName }}</p>
+                            <p>Task by <span></span>{{ authData.facebook.displayName }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-success" ng-click="completeTodo($index, todo)"><i class="glyphicon glyphicon-ok"></i>Complete</a>
@@ -81,7 +81,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'complete'}" class="row list-item bg-success">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.github.displayName }}</p>
+                            <p>Task by <span></span>{{ authData.facebook.displayName }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-danger" ng-click="removeTodo($index, todo)"><i class="glyphicon glyphicon-remove"></i> Remove</a>

@@ -5,16 +5,16 @@ app.controller('Ctrl', function($scope, $firebaseAuth, $firebaseArray) {
         
     var ref = new Firebase('https://luminous-heat-4501.firebaseio.com/');
 
-
-    // LOGIN WITH GITHUB
+    // LOGIN WITH FACEBOOK
 
     var auth = $firebaseAuth(ref);
 
     auth.$onAuth(function(authData) {
         $scope.authData = authData;
+        console.log(authData);
     })
     $scope.login = function() {
-        auth.$authWithOAuthPopup("github").catch(function(error) {
+        auth.$authWithOAuthPopup("facebook").catch(function(error) {
             console.error(error);
         });
     }
