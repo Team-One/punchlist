@@ -4,6 +4,11 @@ html, body {
   margin: 0;
 }
 
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+}
+
 *,
 *:after,
 *:before {
@@ -15,6 +20,7 @@ html, body {
 h1 {
 	font-size: 3em;
 	text-align: center;
+	font-weight: 700;
 }
 
 h2 {
@@ -22,9 +28,58 @@ h2 {
 	text-align: center;
 }
 
+
+/*login*/
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.login {
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+/*end of login*/
+
 form {
 	margin: 50px auto 0 auto;
 	width: 80%;
+}
+
+
+.info {
+	color: white;
+	float: left;
+}
+
+.info img {
+	width: 11%;
+    float: left;
+}
+
+.info p {
+	float: left;
+    margin-top: 13px;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+.btn-logout {
+	float: right;
+	margin-top: 4px
 }
 
 .form-control {
@@ -34,18 +89,12 @@ form {
 .btn {
 	padding: 10px 20px;
     border-radius: 0;
-    background: black;
+    font-weight: 700;
     text-transform: uppercase;
-    text-align: center;
 }
 
 .btn-primary {
 	margin-top: 30px;
-}
-
-.btn-primary:hover, .btn:hover {
-	background: white;
-	color: black;
 }
 
 .list-item {
@@ -57,4 +106,6 @@ form {
 	font-size: 1.5em;
 }
 
-
+.todos {
+	margin-top: 100px;
+}

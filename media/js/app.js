@@ -1,32 +1,45 @@
-var todoApp = angular.module('TodoApp', ['firebase']);
+var app = angular.module('app', ['firebase']);
 
 
-todoApp.controller('TodoCtrl', ['$scope', '$firebaseArray',
-    function($scope, $firebaseArray) {
+app.controller('Ctrl', function($scope, $firebaseAuth, $firebaseArray) {
         
-    // CREATE A FIREBASE REFERENCE
-    var todosRef = new Firebase('https://luminous-heat-4501.firebaseio.com/');
+    var ref = new Firebase('https://luminous-heat-4501.firebaseio.com/');
 
-    // GET TODOS AS AN ARRAY
-    $scope.todos = $firebaseArray(todosRef);
 
-    // ADD TODO ITEM METHOD
+    // LOGIN WITH GITHUB
+
+    var auth = $firebaseAuth(ref);
+
+    auth.$onAuth(function(authData) {
+        $scope.authData = authData;
+    })
+    $scope.login = function() {
+        auth.$authWithOAuthPopup("github").catch(function(error) {
+            console.error(error);
+        });
+    }
+    $scope.logout = function() {
+        auth.$unauth();
+    }
+
+    // TODO LIST
+
+    $scope.todos = $firebaseArray(ref);
+
+    // ADD TODO
+
     $scope.addTodo = function () {
 
-        // CREATE A UNIQUE ID
         var timestamp = new Date().valueOf();
-
         $scope.todos.$add({
             id: timestamp,
             name: $scope.todoName,
             status: 'pending'
         });
-
         $scope.todoName = "";
-
     };
 
-    // REMOVE TODO ITEM METHOD
+    // REMOVE TODO 
     $scope.removeTodo = function (index, todo) {
         
         // CHECK THAT ITEM IS VALID
@@ -36,19 +49,19 @@ todoApp.controller('TodoCtrl', ['$scope', '$firebaseArray',
         $scope.todos.$remove(todo);
     };
 
-    // MARK TODO AS IN PROGRESS METHOD
+    // IN PROGRESS
     $scope.startTodo = function (index, todo) {
 
-        // CHECK THAT ITEM IS VALID
+        // CHECK IF ITEM IS VALID
         if (todo.id === undefined)return;
 
-        // UPDATE STATUS TO IN PROGRESS AND SAVE
+        // UPDATE
         todo.status = 'in progress';
         $scope.todos.$save(todo);
 
     };
 
-    // MARK TODO AS COMPLETE METHOD
+    // COMPLETE
     $scope.completeTodo = function (index, todo) {
 
         // CHECK THAT ITEM IS VALID
@@ -58,5 +71,4 @@ todoApp.controller('TodoCtrl', ['$scope', '$firebaseArray',
         todo.status = 'complete';
         $scope.todos.$save(todo);
     };
-
-}]);
+});
