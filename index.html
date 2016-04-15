@@ -28,8 +28,8 @@
                 <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container">
                         <div class="info">
-                            <img ng-src="{{ authData.facebook.profileImageURL }}"/>
-                            <p>{{ authData.facebook.displayName }}</p>
+                            <img ng-src="{{LoginUser.imgSrc}}"/>
+                            <p>{{ LoginUser.name }}</p>
                         </div>
                         <button class="btn btn-logout btn-default"ng-click="logout()">Logout</button>
                     </div>
@@ -41,7 +41,7 @@
                     <form name="todoForm">
                         <div>
                             <h3>Add New Task</h3>
-                            <input type="text" name="todoNameField" ng-model="todoName" placeholder="(min 3 chars)" required ng-minlength="3" class="form-control" ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
+                            <input type="text" name="todoNameField" ng-model="todoName" placeholder="(minimum 4 characters)" required ng-minlength="4" class="form-control" ng-keyup="($event.keyCode == 13 && todoName.length > 2) ? addItem() : return"
                             />
                             <button ng-click="addTodo()" ng-hide="myForm.todoNameField.$invalid" class="btn btn-primary" type="button">Save New Task</button>
                         </div>
@@ -53,7 +53,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'pending'}" class="row list-item">
                         <div class="col-md-9">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.facebook.displayName }} </p>
+                            <p>Task by <span></span>{{ LoginUser.name }} </p>
                         </div>
                         <div class="col-md-3 text-right">
                             <a class="btn btn-warning" ng-click="startTodo($index, todo)">Start</a>
@@ -68,7 +68,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'in progress'}" class="row list-item bg-warning">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.facebook.displayName }}</p>
+                            <p>Task by <span></span>{{ LoginUser.name }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-success" ng-click="completeTodo($index, todo)"><i class="glyphicon glyphicon-ok"></i>Complete</a>
@@ -81,7 +81,7 @@
                     <div ng-repeat="todo in todos | filter:{status: 'complete'}" class="row list-item bg-success">
                         <div class="col-md-6">
                             <span>{{todo.name}}</span>
-                            <p>Task by <span></span>{{ authData.facebook.displayName }}</p>
+                            <p>Task by <span></span>{{ LoginUser.name }}</p>
                         </div>
                         <div class="col-md-6 text-right">
                             <a class="btn btn-danger" ng-click="removeTodo($index, todo)"><i class="glyphicon glyphicon-remove"></i> Remove</a>

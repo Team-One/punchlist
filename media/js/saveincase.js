@@ -8,34 +8,34 @@ app.controller('Ctrl', function($scope, $firebaseAuth, $firebaseArray) {
     var auth = $firebaseAuth(ref);
     var authData = ref.getAuth();
 
-    // function authDataCallback(authData) {
-    //     if (authData) {
-    //        console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    //     } else {
-    //         console.log("User is logged out");
-    //     }
-    // }
+    function authDataCallback(authData) {
+        if (authData) {
+           console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+            console.log("User is logged out");
+        }
+    }
 
-    // ref.onAuth(authDataCallback);
+    ref.onAuth(authDataCallback);
 
-    // LOGIN WITH FACEBOOK
-    $scope.LoginUser = {};
-    auth.$onAuth(function(authData) {
-        $scope.authData = authData;
-        console.log(authData);
+    ref.onAuth(function(authData) {
+        if (authData && isNewUser) {
+            ref.child("users").child(authData.uid).set({
+            provider: authData.provider,
+            name: getName(authData)
+            });
+        }
     });
-    $scope.login = function() {
-        auth.$authWithOAuthPopup("facebook").then(function(authData) {
-            console.log("Logged in as:", authData.uid);
-            $scope.LoginUser.name = authData.facebook.displayName;
-            $scope.LoginUser.imgSrc = authData.facebook.cachedUserProfile.picture.data.url;
-        }).catch(function(error) {
-            console.log("Authentication failed:", error);
-        });
-    }
-    $scope.logout = function() {
-        auth.$unauth();
-    }
+    ref.createUser({
+        email    : "bobtony@firebase.com",
+        password : "correcthorsebatterystaple"
+    }, function(error, userData) {
+        if (error) {
+            console.log("Error creating user:", error);
+        } else {
+            console.log("Successfully created user account with uid:", userData.uid);
+        }
+    });
 
     function getName(authData) {
         switch(authData.provider) {
@@ -48,14 +48,20 @@ app.controller('Ctrl', function($scope, $firebaseAuth, $firebaseArray) {
         }
     }
 
-    ref.onAuth(function(authData) {
-        if (authData && isNewUser) {
-            ref.child("users").child(authData.uid).set({
-            provider: authData.provider,
-            name: getName(authData)
-            });
-        }
-    });
+    // LOGIN WITH FACEBOOK
+
+    auth.$onAuth(function(authData) {
+        $scope.authData = authData;
+        console.log(authData);
+    })
+    $scope.login = function() {
+        auth.$authWithOAuthPopup("facebook").catch(function(error) {
+            console.error(error);
+        });
+    }
+    $scope.logout = function() {
+        auth.$unauth();
+    }
 
     // TODO LIST
 
