@@ -1,0 +1,31 @@
+<!-- <md-button class="md-raised md-button" ng-click="status.logout()">Logout</md-button>
+ --><h1 class="md-display-4">PUNCHLIST</h1>
+<h2 class="md-display-2">Create &amp; Complete Tasks</h2>
+
+<md-input-container class="status-add">
+    <label>ADD NEW TASK</label>
+    <textarea ng-model="status.statusText" type="text"></textarea>
+</md-input-container>
+<md-button class="md-raised md-button md-ink-ripple" ng-click="status.addStatus()">POST</md-button>
+
+<md-content>
+    <md-list>
+        <md-list-item class="md-2-line" ng-repeat="statusItem in status.statusData | orderBy:'-date'">
+            <img ng-src="http://www.gravatar.com/avatar/{{ status.md5.createHash(statusItem.user.email) }}" class="face" alt="{{ statusItem.user.username }}">
+            <div class="md-list-item-text">
+                <h3>{{ statusItem.user.username }}</h3>
+                <span>{{ statusItem.date | date:'mediumDate' }}</span>
+                <p>{{ statusItem.text }}</p>
+            </div>
+            <md-divider md-inset></md-divider>
+            <!-- <md-icon class="remove-status"
+                     ng-if="statusItem.user.username === loggedInUserData.username"
+                     ng-click="status.deleteStatus(statusItem)">
+                REMOVE
+            </md-icon> -->
+            <md-button class="md-raised md-warn md-ink-ripple remove-status" 
+                ng-if="statusItem.user.username === loggedInUserData.username"
+                ng-click="status.deleteStatus(statusItem)">REMOVE</md-button>
+        </md-list-item>
+    </md-list>
+</md-content>

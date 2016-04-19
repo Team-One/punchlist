@@ -1,0 +1,43 @@
+<h1 class="md-display-4">PUNCHLIST</h1>
+<h2 class="md-display-2">Create &amp; Complete Tasks</h2>
+<md-content class="md-padding auth">
+    <md-tabs md-dynamic-height md-border-bottom>
+
+        <md-tab label="login">
+            <md-content class="md-padding">
+                <h1 class="md-display-3">LOGIN</h1>
+                <md-input-container class="auth-container">
+                    <label>Email</label>
+                    <input ng-model="auth.email" type="text">
+                </md-input-container>
+                <md-input-container class="auth-container">
+                    <label>Password</label>
+                    <input type="password" ng-model="auth.password" type="text">
+                </md-input-container>
+                <md-button class="md-raised md-button" ng-click="auth.login()">Login</md-button>
+            </md-content>
+        </md-tab>
+
+        <md-tab label="register">
+            <md-content class="md-padding">
+                <h1 class="md-display-2">REGISTER</h1>
+                <md-input-container class="auth-container">
+                    <label>User Name</label>
+                    <input ng-model="auth.username" type="text">
+                </md-input-container>
+                <md-input-container class="auth-container">
+                    <label>Email</label>
+                    <input ng-model="auth.email" type="text">
+                </md-input-container>
+                <md-input-container class="auth-container">
+                    <label>Password</label>
+                    <input type="password" ng-model="auth.password" type="text">
+                </md-input-container>
+                <md-button class="md-raised md-primary" ng-click="auth.createUser()">
+                    Register
+                </md-button>
+            </md-content>
+        </md-tab>
+
+    </md-tabs>
+</md-content>

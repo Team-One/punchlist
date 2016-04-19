@@ -1,0 +1,72 @@
+h1, h2 {
+	text-align: center;
+}
+
+.md-display-4 {
+	line-height: 30px;
+}
+
+.layout-row > div{
+	margin: 0 auto;
+	width: 90%;
+}
+
+/*auth*/
+
+md-tabs-canvas {
+	width: 100%;
+	display: block;
+}
+
+md-tabs-wrapper {
+	width: 210px;
+	margin: 0 auto;
+}
+
+.auth {
+	width: 40%;
+	margin: 0 auto;
+}
+
+.auth-container {
+	width: 100%;
+	display: block;
+    margin: 18px auto;
+}
+   
+/*end of auth*/
+
+.face {
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 48px;
+    margin: 16px;
+}
+
+md-content {
+	padding: 30px 0;
+}
+
+.remove-status {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.status-add {
+	width: 100%;
+	margin: 100px 0 0px 0;
+}
+
+.md-button.md-raised {
+	background-color: black;
+	color: white;
+	padding: 1px;
+}
+
+.md-button.md-raised:not([disabled]):hover {
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	padding: 0;
+}
