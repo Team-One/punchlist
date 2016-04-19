@@ -23,6 +23,14 @@ md-tabs-wrapper {
 	margin: 0 auto;
 }
 
+md-input-container input[type=text], md-input-container input[type=password] {
+	width: 100%;
+}
+
+.md-tab .ng-scope {
+	color: black;
+}
+
 .auth {
 	width: 40%;
 	margin: 0 auto;
@@ -69,4 +77,11 @@ md-content {
 	color: black;
 	border: 1px solid black;
 	padding: 0;
+}
+
+.md-warn.md-raised:not([disabled]):hover {
+	background-color: white;
+	color: black;
+	padding: 0;
+	border: none;
 }
